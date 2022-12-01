@@ -16,8 +16,7 @@ testArgs {
   env = env_p
 }
 
-timestamps {
-    ansiColor('xterm') {
+pipeline {
 		agent {
 			docker {
 				image 'maven:3.8.1-adoptopenjdk-11'
@@ -101,5 +100,5 @@ timestamps {
 				}
 			}
 		}
-	}
+	
 }
