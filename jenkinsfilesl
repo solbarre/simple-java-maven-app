@@ -8,10 +8,12 @@ properties([
   ]),
 ])
 
+def version_p = params.VERSION
+def env_p = params.ENVIRONNEMENT
 
 testArgs {
-  version= params.VERSION
-  env= params.ENVIRONMENT
+  version = version_p
+  env = env_p
 }
 
 timestamps {
