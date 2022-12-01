@@ -1,4 +1,4 @@
-@Library("deployment@1.0") _
+@Library("deployment") _
 
 properties([
   buildDiscarder(logRotator(numToKeepStr: "10")),
