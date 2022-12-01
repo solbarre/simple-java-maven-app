@@ -9,7 +9,7 @@ properties([
 ])
 
 def version_p = params.VERSION
-def env_p = params.ENVIRONNEMENT
+def env_p = params.ENVIRONMENT
 
 testArgs {
   version = version_p
