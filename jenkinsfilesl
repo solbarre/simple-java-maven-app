@@ -10,8 +10,8 @@ properties([
 
 
 testArgs {
-  version= params.VERSION
-  env= params.ENVIRONMENT
+  version: params.VERSION
+  env: params.ENVIRONMENT
 }
 
 timestamps {
