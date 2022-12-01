@@ -8,12 +8,10 @@ properties([
   ]),
 ])
 
-def version_p = params.VERSION
-def env_p = params.ENVIRONMENT
 
 testArgs {
-  version = version_p
-  env = env_p
+  version = params.VERSION
+  env = params.ENVIRONMENT
 }
 
 pipeline {
