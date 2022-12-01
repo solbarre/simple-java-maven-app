@@ -10,8 +10,8 @@ properties([
 
 
 testArgs {
-  version = $VERSION,
-  env = $ENVIRONMENT,
+  version:$VERSION,
+  env:$ENVIRONMENT,
 }
 
 timestamps {
