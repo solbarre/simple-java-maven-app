@@ -21,7 +21,10 @@ pipeline {
         stage('Build') {
             steps {
                   echo 'bonjour'
-                  //sh 'mvn -B -DskipTests clean package'
+                  withEnv(['PATH=/something_invalid']) {
+                     
+                    sh 'mvn -B -DskipTests clean package'
+                  }
             }
         }
         stage('Test') {
