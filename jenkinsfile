@@ -5,6 +5,7 @@ pipeline {
             //args '-u root'
             //args '-u root -v /root/.m2:/root/.m2'
             args '-u root -v $HOME/.m2:/var/maven/.m2:z -e MAVEN_CONFIG=/var/maven/.m2 -e MAVEN_OPTS="-Duser.home=/var/maven"'
+            workingDir '/home/jenkins/agent'
         }
     }
     //options {
@@ -21,10 +22,10 @@ pipeline {
         stage('Build') {
             steps {
                   echo 'bonjour'
-                  withEnv(['PATH=/something_invalid']) {
+                  
                      
                     sh 'mvn -B -DskipTests clean package'
-                  }
+                  
             }
         }
         stage('Test') {
