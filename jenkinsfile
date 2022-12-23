@@ -13,14 +13,6 @@ pipeline {
         NEXUS_CREDENTIAL_ID = "NEXUSCRED"
     }
     stages {
-        stage ('Initialize') {
-            steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
-            }
-        }
         stage('Build') {
             steps {
                      echo 'bonjour'
@@ -39,21 +31,6 @@ pipeline {
                 }
             }
         }
-        /*
-        stage('Sonarqube') {
-           environment {
-              scannerHome = tool 'SonarQubeScanner'
-           }
-           steps {
-              withSonarQubeEnv('sonarqube') {
-                 sh "${scannerHome}/bin/sonar-scanner"
-              }
-              timeout(time: 10, unit: 'MINUTES') {
-                 waitForQualityGate abortPipeline: true
-              }
-           }
-        }
-        */
         stage("Publish to Nexus Repository Manager") {
             steps {
                 script {
@@ -90,3 +67,4 @@ pipeline {
             }
         }
     }
+ }
