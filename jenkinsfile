@@ -1,29 +1,29 @@
 pipeline {
     agent {
         docker {
-            image 'maven:3.8.6-eclipse-temurin-11' 
-            args '-v /root/.m2:/root/.m2' 
+            image 'maven:3.8.1-adoptopenjdk-11'
+            args '-v /root/.m2:/root/.m2'
         }
+    }
+    options {
+        skipStagesAfterUnstable()
     }
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "http://ec2-35-180-91-106.eu-west-3.compute.amazonaws.com:8081"
+        NEXUS_URL = "http://ec2-13-36-167-103.eu-west-3.compute.amazonaws.com:8081/"
         NEXUS_REPOSITORY = "maven-uni-repo"
         NEXUS_CREDENTIAL_ID = "NEXUSCRED"
     }
     stages {
         stage('Build') {
             steps {
-                     echo 'bonjour'
-                     sh "mvn -B -DskipTests clean package"   
+                sh 'mvn -B -DskipTests clean package'
             }
         }
         stage('Test') {
             steps {
-               withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']) {
-                  sh "mvn test"
-               }
+                sh 'mvn test'
             }
             post {
                 always {
@@ -45,12 +45,12 @@ pipeline {
                             nexusVersion: NEXUS_VERSION,
                             protocol: NEXUS_PROTOCOL,
                             nexusUrl: NEXUS_URL,
-                            groupId: "pom.groupId",
-                            version: "pom.version",
+                            groupId: "pom.com.mycompany.app",
+                            version: "pom.1.0-SNAPSHOT",
                             repository: NEXUS_REPOSITORY,
                             credentialsId: NEXUS_CREDENTIAL_ID,
                             artifacts: [
-                                [artifactId: 'pom.artifactId',
+                                [artifactId: 'pom.amy-app',
                                 classifier: '',
                                 file: artifactPath,
                                 type: pom.packaging],
@@ -67,4 +67,5 @@ pipeline {
             }
         }
     }
- }
+}
+
